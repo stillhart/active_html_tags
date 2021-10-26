@@ -6,8 +6,8 @@ Gem::Specification.new do |spec|
   spec.authors     = ["Fabian stillhart"]
   spec.email       = ["fabian_stillhart@hotmail.com"]
   spec.homepage    = "https://github.com/stillhart/active_html_tags"
-  spec.summary     = "A simple helper to use html tags as a method like content_tag"
-  spec.description = "Annoyed to write content_tag(:span, 'LOL')? Just use all the html tags helpers like span('lol') to avoid writing to much code while having the safety of rails."
+  spec.summary     = "A simple helper to bring content_tag to the next level"
+  spec.description = "Annoyed to write content_tag(:span, 'LOL')? Just use the new helpers as follows span('lol') to avoid writing to much code while having the safety of rails."
   spec.license     = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -20,5 +20,5 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  spec.add_dependency "rails", "~> 6.1.4", ">= 6.1.4.1"
+  spec.add_dependency "rails", "~> 6.1", ">= 6.1.4.1"
 end
