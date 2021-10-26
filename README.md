@@ -85,11 +85,9 @@ Boht arrays and hashes are joined using ` ; `
 
 Options will be joined using ` ; ` in case of html attributes who require javascript. A reference of these is also available here: [w3schools - HTML Attribute Reference](https://www.w3schools.com/tags/ref_attributes.asp)
 ```ruby
-<%= span "don't click me", onclick: "1 + 1" %>
-# <span onclick="1 + 1">don't click me</span>
 <%= span "don't click me", onclick: ["1 + 1", "2 + 2"] %>
 # <span onclick="1 + 1 ; 2 + 2">don't click me</span>
-```ruby
+```
 
 Only the values will be shown in case of hashes. This allows easier code re-use and overwriting.
 ```ruby
