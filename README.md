@@ -67,7 +67,7 @@ vs
 
 This allows for more complex scenarios
 ```ruby
-<%= base_style = {"background-color" => "blue"} # Place this somewhere nicely to allow for compositon. %>
+<%= base_style = {"background-color" => "blue"} # Place this logic somewhere nicely %>
 
 <%= span "this text is actually green on blue", style: base_style.merge({color: :green}) %>
 # <span style="background-color: blue ; color: green">this text is actually green on blue</span>
