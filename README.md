@@ -17,7 +17,9 @@ Now you should be able to use any html tag as a ruby method in your views.
 ActiveHtmlTags is a helper to use any kind of HTML tag as a direct method instead of passing it to `content_tag`. At the same time it allows for multiple arguments to be given and for smarter options.
 
 ```ruby
-# In any view using ApplicationHelper, for example in app/views/___/___.html.erb or app/views/layouts/application.html.erb
+# In any view using ApplicationHelper
+# for example in app/views/___/___.html.erb
+# app/views/layouts/application.html.erb
 
 <%= h1 "This is pretty awesome" %>
 <%= content_tag :h1, "compared to this" %>
@@ -46,9 +48,9 @@ A list of all HTML available and usable tags can be found on [w3schools - TAGs](
 
 Additionally the `content_tag` method signature has been improved slightly. Now it supports a list of arguments
 ```ruby
-<%= h1 "This is pretty awesome", "because you can add as much as you want", small("and what you want") %>
+<%= h1 "You can add as much", "as you want", small("and what you want") %>
 vs
-<%= content_tag :h1, safe_join(["this is", "not very", "sexy", content_tag(:small, "or readable")], " ") %>
+<%= content_tag :h1, safe_join(["this is not very", "sexy", content_tag(:small, "or readable")], " ") %>
 ```
 
 ### Advanced options for style
@@ -56,10 +58,10 @@ vs
 Have you ever wondered why this happens with css? Now you don't have run into this anymore, arrays and hashes are first class citizens in ActiveHtmlTags.
 
 ```ruby
-<%= span "this text is actually green", style: {color: :green}%>
+<%= span "this text is actually green", style: {color: :green} %>
 # <span style="color: green">this text is actually green</span>
 vs
-<%= content_tag :span, "this text is sadly not green", style: {color: :green}%>
+<%= content_tag :span, "this text is sadly not green", style: {color: :green} %>
 # <span style="{color: :green}">this text is sadly not green</span>
 ```
 
