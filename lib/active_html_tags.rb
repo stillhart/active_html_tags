@@ -290,7 +290,7 @@ module ActiveHtmlTags
     srcset: :default,
     start: :default,
     step: :default,
-    style: :default,
+    style: :style,
     tabindex: :default,
     target: :default,
     title: :default,
@@ -303,7 +303,7 @@ module ActiveHtmlTags
   }
 
   HTML_TAGS.each do |tagname|
-    define_method tagname do  |*args, safe_join_with: "", **opts, &blk|
+    define_method tagname do  |*args, safe_join_with: " ", **opts, &blk|
       opts.each do |key,value|
         case HTML_ATTRIBUTES[key]
         when :default
@@ -326,9 +326,9 @@ module ActiveHtmlTags
           case opts[key]
           when nil, String # fastpath
           when Hash
-            opts = opts.merge(key => safe_join(opts[key].values, " ; "))
+            opts = opts.merge(key => safe_join(opts[key].values.flatten, " ; "))
           when Array
-            opts = opts.merge(key => safe_join(opts[key].map(&:to_s), " ; "))
+            opts = opts.merge(key => safe_join(opts[key].flatten.map(&:to_s), " ; "))
           end 
         end
       end
