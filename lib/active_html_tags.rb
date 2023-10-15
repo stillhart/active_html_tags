@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_html_tags/version'
 require 'active_html_tags/railtie'
 
@@ -128,7 +130,7 @@ module ActiveHtmlTags
     :br
     # :"!--...--",
     # :"!doctype",
-  ]
+  ].freeze
 
   HTML_ATTRIBUTES = {
     accept: :default,
@@ -300,7 +302,7 @@ module ActiveHtmlTags
     value: :default,
     width: :default,
     wrap: :default
-  }
+  }.freeze
 
   HTML_TAGS.each do |tagname|
     define_method tagname do |*args, safe_join_with: ' ', **opts, &blk|
