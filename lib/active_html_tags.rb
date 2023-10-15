@@ -1,5 +1,5 @@
-require "active_html_tags/version"
-require "active_html_tags/railtie"
+require 'active_html_tags/version'
+require 'active_html_tags/railtie'
 
 module ActiveHtmlTags
   HTML_TAGS = [
@@ -125,14 +125,14 @@ module ActiveHtmlTags
     :video,
     :wbr,
     :hr,
-    :br,
+    :br
     # :"!--...--",
     # :"!doctype",
   ]
 
   HTML_ATTRIBUTES = {
     accept: :default,
-    #accept-charset: :default,
+    # accept-charset: :default,
     accept_charset: :default,
     accesskey: :default,
     action: :default,
@@ -156,7 +156,7 @@ module ActiveHtmlTags
     controls: :default,
     coords: :default,
     data: :default,
-    #data-*: :default,
+    # data-*: :default,
     datetime: :default,
     default: :default,
     defer: :js,
@@ -175,7 +175,7 @@ module ActiveHtmlTags
     high: :default,
     href: :default,
     hreflang: :default,
-    #http-equiv: :default,
+    # http-equiv: :default,
     http_equiv: :default,
     id: :default,
     ismap: :default,
@@ -299,37 +299,37 @@ module ActiveHtmlTags
     usemap: :default,
     value: :default,
     width: :default,
-    wrap: :default,
+    wrap: :default
   }
 
   HTML_TAGS.each do |tagname|
-    define_method tagname do  |*args, safe_join_with: " ", **opts, &blk|
-      opts.each do |key,value|
+    define_method tagname do |*args, safe_join_with: ' ', **opts, &blk|
+      opts.each do |key, _value|
         case HTML_ATTRIBUTES[key]
         when :default
           case opts[key]
-          when nil, String #fastpath
+          when nil, String # fastpath
           when Hash
-            opts = opts.merge(key => safe_join(opts[key].values, " "))
+            opts = opts.merge(key => safe_join(opts[key].values, ' '))
           when Array
-            opts = opts.merge(key => safe_join(opts[key].map(&:to_s), " "))
+            opts = opts.merge(key => safe_join(opts[key].map(&:to_s), ' '))
           end
         when :style
           case opts[:style]
-          when nil, String #fastpath
+          when nil, String # fastpath
           when Hash
-            opts = opts.merge(style: safe_join(opts[:style].map {|key,value| safe_join([key, value], ": ")}, " ; "))
+            opts = opts.merge(style: safe_join(opts[:style].map { |key, value| safe_join([key, value], ': ') }, ' ; '))
           when Array
-            opts = opts.merge(style: safe_join(opts[:style].map(&:to_s), " ; "))
+            opts = opts.merge(style: safe_join(opts[:style].map(&:to_s), ' ; '))
           end
         when :js
           case opts[key]
           when nil, String # fastpath
           when Hash
-            opts = opts.merge(key => safe_join(opts[key].values.flatten, " ; "))
+            opts = opts.merge(key => safe_join(opts[key].values.flatten, ' ; '))
           when Array
-            opts = opts.merge(key => safe_join(opts[key].flatten.map(&:to_s), " ; "))
-          end 
+            opts = opts.merge(key => safe_join(opts[key].flatten.map(&:to_s), ' ; '))
+          end
         end
       end
       content_tag(tagname, safe_join(args.flatten, safe_join_with), **opts, &blk)
