@@ -14,7 +14,7 @@ Now you should be able to use any html tag as a ruby method in your views.
 
 # Usage
 
-ActiveHtmlTags is a helper to use any kind of HTML tag as a direct method instead of passing it to `content_tag`. At the same time it allows for multiple arguments to be given and for smarter options.
+ActiveHtmlTags is a helper to use any kind of HTML tag as a direct method instead of passing it to `content_tag #` or `tag.#`. At the same time it allows for multiple arguments to be given and for smarter options.
 
 ```ruby
 # In any view using ApplicationHelper
@@ -22,7 +22,8 @@ ActiveHtmlTags is a helper to use any kind of HTML tag as a direct method instea
 # app/views/layouts/application.html.erb
 
 <%= h1 "This is pretty awesome" %>
-<%= content_tag :h1, "compared to this" %>
+<%= tag.h1, "compared to this" %>
+<%= content_tag :h1, "or this" %>
 ```
 
 The name mappings from html tags to method names are 1:1. Therefore you can create constructs like these:
@@ -42,7 +43,7 @@ The name mappings from html tags to method names are 1:1. Therefore you can crea
 <% end %>
 ```
 
-A list of all HTML available and usable tags can be found on [w3schools - TAGs](https://www.w3schools.com/TAGs/). 
+A list of all HTML available and usable tags can be found on [w3schools - TAGs](https://www.w3schools.com/TAGs/).
 
 Currently all these tags are supported:
 ```
@@ -64,6 +65,7 @@ Additionally the `content_tag` method signature has been improved slightly. Now 
 ```ruby
 <%= h1 "You can add as much", "as you want", small("and what you want") %>
 vs
+<%= tag.span :h1, safe_join(["this is not very", "sexy", content_tag(:small, "or readable")], " ") %>
 <%= content_tag :h1, safe_join(["this is not very", "sexy", content_tag(:small, "or readable")], " ") %>
 ```
 
@@ -76,7 +78,7 @@ Have you ever wondered why this happens with css? Now you don't have run into th
 # <span style="color: green">this text is actually green</span>
 vs
 <%= content_tag :span, "this text is sadly not green", style: {color: :green} %>
-# <span style="{color: :green}">this text is sadly not green</span>
+# <span style="color green">this text is sadly not green</span>
 ```
 
 This allows for more complex scenarios
@@ -153,6 +155,12 @@ $ gem install active_html_tags
 ## Contributing
 
 Feel free to create a merge request in case of bugs, features and more.
+
+### Test
+
+```
+bundle exec rake test
+```
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
